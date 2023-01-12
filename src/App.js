@@ -1,3 +1,4 @@
+// COMPONENTS
 import Header from './components/Header'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
@@ -7,10 +8,15 @@ import EditPost from './components/EditPost'
 import PostPage from './components/PostPage'
 import About from './components/About'
 import Missing from './components/Missing'
+// DEPENDENCIES
 import { Route, Switch, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
+// AXIOS DEF
 import api from "./api/posts"
+// CUSTOM HOOKS
+import useWindowSize from './hooks/useWindowSize'
+
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -21,6 +27,7 @@ function App() {
   const [editTitle, setEditTitle] = useState('')
   const [editBody, setEditBody] = useState('')
   const history = useHistory()
+  const { width } = useWindowSize();
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -95,7 +102,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header title={'ReactJS Blog'} />
+      <Header title={'ReactJS Blog'} width={width} />
       <Nav search={search} setSearch={setSearch} />
       <Switch>
         <Route exact path="/">
